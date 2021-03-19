@@ -9,7 +9,8 @@ module.exports={
 //存入随机发生的邮箱验证码
 async function InsertCode(email,code){
     await emailcode.sync()
-   return await emailcode.create({email,code})
+   const isCreateCode= await emailcode.create({email,code})
+   return JSON.parse(JSON.stringify(isCreateCode, null, 2))
 }
 //查询邮箱验证码
 async function codeFind(email){
@@ -17,8 +18,7 @@ async function codeFind(email){
     attributes:['code'],
     where:{email}},
    )
- 
-   return JSON.stringify(code, null, 2)
+   return JSON.parse(JSON.stringify(code, null, 2))
 }
 //删除验证码
 async function delCode(email){
@@ -27,6 +27,5 @@ async function delCode(email){
           email
         }
       });
-      return {isdel:JSON.stringify(isdel, null, 2)}
-    
+      return  JSON.parse(JSON.stringify(isdel, null, 2))  
 }
