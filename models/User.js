@@ -1,9 +1,5 @@
 const {sequelize,DataTypes}=require('../config/db')
 const User=sequelize.define('User',{
-    id:{type:DataTypes.INTEGER,
-        primaryKey:true,
-        autoIncrement:true
-    },
     uuid:{type: DataTypes.UUID,
         allowNull:false
          },
@@ -14,6 +10,6 @@ const User=sequelize.define('User',{
         allowNull:false},
     role:{type:DataTypes.INTEGER,
            defaultValue:1},
-        HeaderUrl:DataTypes.STRING
+     HeaderUrl:DataTypes.STRING
 },{freezeTableName: true})
 module.exports=User
