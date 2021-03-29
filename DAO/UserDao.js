@@ -1,6 +1,6 @@
 const user=require('../models/User')
 const {Op}=require('sequelize')
-const uuid=(require('uuid').v4()).replace(/-/g,'')
+// const uuid=(require('uuid').v4()).replace(/-/g,'')
 module.exports={
     createUser,
     findAllUser,
@@ -12,7 +12,7 @@ module.exports={
 //创建一个新用户
 async function createUser(username,password,email){
 await user.sync()
-const newuser= await user.create({uuid,username,password,email})
+const newuser= await user.create({username,password,email})
    return JSON.parse(JSON.stringify(newuser, null, 2))
 }
 

@@ -19,16 +19,16 @@ nms.run()
 nms.on('prePublish', async (id, StreamPath, args) => {
   console.log('[NodeEvent on prePublish]', `id=${id} StreamPath=${StreamPath} args=${JSON.stringify(args)}`);
   let session = nms.getSession(id);
-  let uuid = StreamPath.split('/').pop()
-  let liver = await live.findLiver(uuid)
+  let uid = StreamPath.split('/').pop()
+  let liver = await live.findLiver(uid)
   if (liver===null) return session.reject()
-  await live.updataIslive({uuid,islive:true})
+  await live.updataIslive({uid,islive:true})
 })
 
 //断开连接
 nms.on('donePublish', async (id, StreamPath) => {
-  let uuid = StreamPath.split('/').pop()
-  let liver = await live.findLiver(uuid)
+  let uid = StreamPath.split('/').pop()
+  let liver = await live.findLiver(uid)
   if (liver===null) return 
-  await live.updataIslive({uuid,islive:false})
+  await live.updataIslive({uid,islive:false})
 });

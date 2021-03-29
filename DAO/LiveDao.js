@@ -7,16 +7,16 @@ module.exports={
 }
 
 //添加用户直播
- async function addLive(uuid,imgUrl,title,publishUrl,playUrl,shopping){
+ async function addLive({uid,imgUrl,title,publishUrl,playUrl,shopping}){
     await live.sync()
-    const newlive=await live.create({uuid,imgUrl,title,publishUrl,playUrl,shopping})
+    const newlive=await live.create({uid,imgUrl,title,publishUrl,playUrl,shopping})
     return JSON.parse(JSON.stringify(newlive, null, 2))
  }
  //更新用户直播状态
- async function updataIslive(uuid,islive){
+ async function updataIslive({uid,islive}){
     await live.sync()
-     const uplive=await live.update({islive:islive},{
-        where:{uuid}
+     const uplive=await live.update({islive},{
+        where:{uid}
     })
     return JSON.parse(JSON.stringify(uplive, null, 2))
  }
@@ -27,9 +27,9 @@ module.exports={
 //    })
 //    return JSON.parse(JSON.stringify(liver, null, 2))
 // }
-async function findLiver(uuid){
+async function findLiver(uid){
     await live.sync()
-    const liver=await live.findOne({ where:{uuid}})
+    const liver=await live.findOne({ where:{uid}})
    return liver
 }
 

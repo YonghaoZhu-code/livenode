@@ -4,7 +4,7 @@ const mail=require('../plugins/mail')
 const emailcode=require('../DAO/emailCodeDao')
 const random=require('random')
 const route=express.Router()
-const token=require('../plugins/token')
+// const token=require('../plugins/token')
 // const sendmailcode=require('../plugins/sendmailcode')
 
 //发送邮箱验证码
@@ -41,7 +41,7 @@ route.post('/register',async (req,res)=>{
      if(!user[0]) return res.json({code:401,msg:'用户不存在'})
      if(password!=user[0].password) return res.json({code:401,msg:'密码错误'})
      //发送token
-     let Token=token.encript({data:user[0].uuid},'1h')
+    //  let Token=token.encript({data:user[0].uid},'1h')
      const userInfo= await userdao.getUser(loginid)
      return res.json({code:200,msg:'登录成功',Token,userInfo:userInfo[0]})
 
@@ -57,7 +57,7 @@ route.post('/register',async (req,res)=>{
    if(!code[0]) return res.json({code:401,msg:'验证码已过期，请重新发送'})
    if(mailcode!=code[0].code) return res.json({code:401,msg:'验证码错误'})
      //发送token
-     let Token=token.encript({data:user[0].uuid},'1h')
+    //  let Token=token.encript({data:user[0].uid},'1h')
      return res.json({code:200,msg:'登录成功',Token})
  })
   //通过邮箱和验证码

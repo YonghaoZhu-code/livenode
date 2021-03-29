@@ -1,9 +1,8 @@
 const {sequelize,DataTypes}=require('../config/db')
 const User=require('./User')
 const Live=sequelize.define('Live',{
-    uuid:{type:DataTypes.UUID,
-        unique:true
-    },
+    uid:{type:DataTypes.UUID,
+          primaryKey:true},
     imgUrl:{type:DataTypes.STRING,
     defaultValue:''},
     title:DataTypes.STRING,
@@ -13,10 +12,12 @@ const Live=sequelize.define('Live',{
     isLive:{type:DataTypes.BOOLEAN,
         defaultValue:false}
 },{
-    freezeTableName: true  
+    freezeTableName: true,
+    timestamps:false  
 })
 User.hasOne(Live,{
     foreignKey: {
+        name:'uid',
         type: DataTypes.UUID
       }
     })

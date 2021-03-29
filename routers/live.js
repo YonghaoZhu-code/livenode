@@ -3,8 +3,8 @@ const route=express.Router()
 const live=require('../DAO/LiveDao')
 //添加直播
 route.get('/addlive',async(req,res)=>{
-    const {uuid,imgUrl,title,shopping}=req.query
-    const isadd=live.addLive({uuid,imgUrl,title,publishUrl: `/live/${uuid}`, playUrl: `/live/${uuid}.flv`,shopping})
+    const {uid,imgUrl,title,shopping}=req.query
+    const isadd=await live.addLive({uid,imgUrl,title,publishUrl: `/live/${uid}`, playUrl: `/live/${uid}.flv`,shopping})
     console.log(isadd)
     res.json({code:200,msg:'ok'})
 })
