@@ -6,7 +6,9 @@ module.exports={
     findAllUser,
         findOne,
         getUser,
-        updataHeaderUrl
+        updataHeaderUrl,
+        udatauser,
+        createUserTest
 
 }
 //创建一个新用户
@@ -15,6 +17,14 @@ await user.sync()
 const newuser= await user.create({username,password,email})
    return JSON.parse(JSON.stringify(newuser, null, 2))
 }
+
+//
+//创建一个新用户测试添加
+async function createUserTest(username,password,email,role){
+    await user.sync()
+    const newuser= await user.create({username,password,email,role})
+       return JSON.parse(JSON.stringify(newuser, null, 2))
+    }
 
 //查找用户通过用户名或邮箱
 async function findOne(loginid){
@@ -51,6 +61,12 @@ async function updataHeaderUrl(email,headerurl){
       where:{email}
   })
   return JSON.parse(JSON.stringify(isupdata, null, 2))
+}
+
+//更新用户信息
+async function udatauser(username,password){
+    const isupdata=await user.update({username,password})
+    return JSON.parse(JSON.stringify(isupdata, null, 2))
 }
 //查找用户名
 async function findAllUser(){

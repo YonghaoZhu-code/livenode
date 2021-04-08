@@ -43,7 +43,7 @@ route.post('/register',async (req,res)=>{
      //发送token
     //  let Token=token.encript({data:user[0].uid},'1h')
      const userInfo= await userdao.getUser(loginid)
-     return res.json({code:200,msg:'登录成功',Token,userInfo:userInfo[0]})
+     return res.json({code:200,msg:'登录成功',userInfo:userInfo[0]})
 
   })
 
@@ -58,8 +58,17 @@ route.post('/register',async (req,res)=>{
    if(mailcode!=code[0].code) return res.json({code:401,msg:'验证码错误'})
      //发送token
     //  let Token=token.encript({data:user[0].uid},'1h')
-     return res.json({code:200,msg:'登录成功',Token})
+     return res.json({code:200,msg:'登录成功'})
  })
+
+ //更新用户信息
+route.get('/updatauser',async (req,res,next)=>{
+    const {username,password}=req.query
+    await userdao.udatauser(username,password)
+    res.json({code:200,msg:'修改成功'})
+})
+
+
   //通过邮箱和验证码
 // route.get('/iscode',async (req,res)=>{
 //     const {email}=req.query

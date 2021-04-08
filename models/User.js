@@ -1,7 +1,7 @@
 const {sequelize,DataTypes}=require('../config/db')
 const shortid=require('shortid')
 const User=sequelize.define('User',{
-    uuid:{type: DataTypes.UUID,
+    uid:{type: DataTypes.UUID,
         primaryKey:true,
         defaultValue:shortid.generate()},
     username:DataTypes.STRING,
@@ -11,6 +11,7 @@ const User=sequelize.define('User',{
         allowNull:false},
     role:{type:DataTypes.INTEGER,
            defaultValue:1},
-     HeaderUrl:DataTypes.STRING
+    HeaderUrl:{type:DataTypes.STRING,
+        defaultValue:'static/headimg/default.jpg'}
 },{freezeTableName: true})
 module.exports=User

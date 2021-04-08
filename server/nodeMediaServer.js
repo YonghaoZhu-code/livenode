@@ -22,7 +22,7 @@ nms.on('prePublish', async (id, StreamPath, args) => {
   let uid = StreamPath.split('/').pop()
   let liver = await live.findLiver(uid)
   if (liver===null) return session.reject()
-  await live.updataIslive({uid,islive:true})
+  await live.updataIslive({uid,isLive:true})
 })
 
 //断开连接
@@ -30,5 +30,5 @@ nms.on('donePublish', async (id, StreamPath) => {
   let uid = StreamPath.split('/').pop()
   let liver = await live.findLiver(uid)
   if (liver===null) return 
-  await live.updataIslive({uid,islive:false})
+  await live.updataIslive({uid,isLive:false})
 });
