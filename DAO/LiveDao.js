@@ -69,7 +69,7 @@ async function changeNumber(uid,fans,gift,no){
 //    })
 //    return JSON.parse(JSON.stringify(liver, null, 2))
 // }
-
+//查找主播
 async function findLiver(uid){
     await live.sync()
     const liver=await live.findOne({ where:{uid}})

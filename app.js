@@ -3,6 +3,7 @@ const path = require("path")
 const app = express()
 const port = 9300
 require('./server/nodeMediaServer')
+require('./server/webSocket')
 app.use(require('cors')())
 app.use(express.json())
 //访问静态文件

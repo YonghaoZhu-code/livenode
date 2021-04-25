@@ -15,7 +15,7 @@ route.get('/addlive',async(req,res)=>{
 //开启直播
 route.get('/onlive',async(req,res)=>{
     const {uid,title,catalog,shopping}=req.query
-    await live.onlive({uid,imgUrl,title,catalog, playUrl: `/live/${uid}.flv`,shopping})
+    await live.onlive({uid,imgUrl,title,catalog, playUrl: `http://127.0.0.1:8989/live/${uid}.flv`,shopping})
     res.json({code:200,msg:'ok'})
 })
 
@@ -38,5 +38,10 @@ route.get('/changenumber',async (req,res)=>{
     await live.changeNumber(uid,fans,gift,no)
     res.json({code:200,msg:'ok'})
 })
-
+//查找主播
+route.get('/getliverinfo',async (req,res)=>{
+const {uid}=req.query
+   const liver= await live.findLiver(uid)
+   res.json({code:200,msg:'ok',liver})
+})
 module.exports=route

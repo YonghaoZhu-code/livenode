@@ -10,7 +10,5 @@ module.exports=app=>{
     app.use('/',live)
 
     //单元测试
-    app.use('/test',test)
-
-       
+    app.use('/test',test)      
 }
