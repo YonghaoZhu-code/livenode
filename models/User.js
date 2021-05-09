@@ -3,7 +3,7 @@ const shortid=require('shortid')
 const User=sequelize.define('User',{
     uid:{type: DataTypes.UUID,
         primaryKey:true,
-        defaultValue:shortid.generate()},
+        defaultValue:shortid.generate},
     username:DataTypes.STRING,
     password:{type:DataTypes.STRING,
         allowNull:false},

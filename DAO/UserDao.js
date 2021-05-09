@@ -40,14 +40,15 @@ async function findOne(loginid){
     return JSON.parse(JSON.stringify(finduser, null, 2))
  }
  //获取用户信息
- async function getUser(loginid){
+ async function getUser(id){
     await user.sync()
     const userInfo= await user.findAll({
-     attributes:['username','email','role','HeaderUrl'],
+     attributes:['uid','username','email','role','HeaderUrl'],
      where:{
         [Op.or]:[
-            {username:loginid},
-            {email:loginid}
+            {username:id},
+            {email:id},
+            {uid:id}
        ]
         }},
     )

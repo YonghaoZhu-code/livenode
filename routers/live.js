@@ -13,9 +13,9 @@ route.get('/addlive',async(req,res)=>{
 })
 
 //开启直播
-route.get('/onlive',async(req,res)=>{
+route.get('/tolive',async(req,res)=>{
     const {uid,title,catalog,shopping}=req.query
-    await live.onlive({uid,imgUrl,title,catalog, playUrl: `http://127.0.0.1:8989/live/${uid}.flv`,shopping})
+    await live.onlive({uid,title,catalog, playUrl: `http://127.0.0.1:8989/live/${uid}.flv`,shopping})
     res.json({code:200,msg:'ok'})
 })
 

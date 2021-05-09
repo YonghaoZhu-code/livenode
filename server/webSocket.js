@@ -2,7 +2,6 @@ const WebSocket=require('ws')
 const wss = new WebSocket.Server({port:8383},()=>{
     console.log('ws服务器已开启，端口8383')
 })
-let rooms=new Map()
 wss.on('connection', function connection(user,req) {
     console.log(req.url+'房间正在建立连接')
     //根据直播间id作为房间名
@@ -13,12 +12,14 @@ wss.on('connection', function connection(user,req) {
         //同一个房间广播消息
       rooms.get(room).forEach(user => {
         if (user.readyState === WebSocket.OPEN) {
-            user.send(msg)
+          console.log(msg)  
+          user.send(msg)
           }
       })
     })
   })
-
+  
+  let rooms=new Map()
   //处理加入房间
   function joinroom(room,user){
       //如果不存在房间，则创建

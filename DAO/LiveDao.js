@@ -8,7 +8,8 @@ module.exports={
   isLiving,
   changeNumber,
   getlivers,
-  addLiveTest
+  addLiveTest,
+  upliveimg
 }
 
 //添加用户直播
@@ -24,10 +25,17 @@ module.exports={
    const newlive=await live.create({uid,name,title,type})
    return JSON.parse(JSON.stringify(newlive, null, 2))
 }
+//上传封面更新直播封面地址
+async function upliveimg(uid,imgUrl){
+   const isupload=await live.update({imgUrl},{
+      where:{uid}
+   })
+   return JSON.parse(JSON.stringify(isupload, null, 2))
+}
 //用户开启直播更新数据
-async function onlive({uid,title,imgUrl,catalog,playUrl,shopping}){
+async function onlive({uid,title,catalog,playUrl,shopping}){
    await live.sync()
-    const isonlive=await live.update({title,imgUrl,catalog,playUrl,shopping},{
+    const isonlive=await live.update({title,catalog,playUrl,shopping},{
        where:{uid}
    })
    return JSON.parse(JSON.stringify(isonlive, null, 2))

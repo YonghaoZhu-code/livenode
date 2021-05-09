@@ -68,7 +68,14 @@ route.get('/updatauser',async (req,res,next)=>{
     res.json({code:200,msg:'修改成功'})
 })
 
+//获取主播头像地址
+route.get('/getheaderurl',async (req,res)=>{
+   const {uid}=req.query
+     const userinfo= await userdao.getUser(uid)
+     const {HeaderUrl}=userinfo[0]
+   return res.json({code:200,msg:'登录成功',HeaderUrl})
 
+})
   //通过邮箱和验证码
 // route.get('/iscode',async (req,res)=>{
 //     const {email}=req.query
