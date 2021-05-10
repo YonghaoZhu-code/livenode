@@ -3,6 +3,7 @@ const User=require('./User')
 const Applicants=sequelize.define('Applicants',{
     uid:{type:DataTypes.UUID,
           primaryKey:true},
+    username:DataTypes.STRING,
     name:DataTypes.STRING, 
     type:DataTypes.INTEGER     
         }

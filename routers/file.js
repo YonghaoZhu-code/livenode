@@ -40,8 +40,8 @@ const LiveimgStorage = multer.diskStorage({
     }
 })
 
-const uploadvedio=multer({storage:LiveimgStorage})
-route.post('/liveimg',uploadvedio.single('liveimg'),async (req,res,next)=>{
+const uploadliveimg=multer({storage:LiveimgStorage})
+route.post('/liveimg',uploadliveimg.single('liveimg'),async (req,res,next)=>{
      const {uid}=req.body
      imgUrl='http://127.0.0.1:9300/static/liveimg/'+req.file.filename
      await liveDao.upliveimg(uid,imgUrl)

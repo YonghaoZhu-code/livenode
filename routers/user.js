@@ -76,6 +76,14 @@ route.get('/getheaderurl',async (req,res)=>{
    return res.json({code:200,msg:'登录成功',HeaderUrl})
 
 })
+
+//修改用户角色
+route.get('/changerole',async (req,res)=>{
+  const {uid,role}=req.query
+  await userdao.changerole(uid,role)
+  return res.json({code:200,msg:'ok'})
+
+})
   //通过邮箱和验证码
 // route.get('/iscode',async (req,res)=>{
 //     const {email}=req.query

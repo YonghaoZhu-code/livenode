@@ -8,7 +8,8 @@ module.exports={
         getUser,
         updataHeaderUrl,
         udatauser,
-        createUserTest
+        createUserTest,
+        changerole
 
 }
 //创建一个新用户
@@ -68,6 +69,14 @@ async function updataHeaderUrl(email,headerurl){
 async function udatauser(username,password){
     const isupdata=await user.update({username,password})
     return JSON.parse(JSON.stringify(isupdata, null, 2))
+}
+
+//修改用户角色
+async function changerole(uid,role){
+    const ischange=await user.update({role},{
+        where:{uid}
+    })
+    return JSON.parse(JSON.stringify(ischange, null, 2))
 }
 //查找用户名
 async function findAllUser(){
