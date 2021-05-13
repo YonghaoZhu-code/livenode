@@ -1,10 +1,12 @@
 const express=require('express')
 const route=express.Router()
 const live=require('../DAO/LiveDao')
-//添加直播（管理员操作）
-route.get('/addlive',async(req,res)=>{
+const userDao=require('../DAO/UserDao')
+//添加主播（管理员操作）
+route.get('/admin/addlive',async(req,res)=>{
     const {uid,name,type}=req.query
    await live.addLive(uid,name,type)
+   await userDao.changerole(uid,type)
     res.json({code:200,msg:'ok'})
     // const {uid,imgUrl,name,title,shopping}=req.query
     // const isadd=await live.addLive({uid,imgUrl,name,title, playUrl: `/live/${uid}.flv`,shopping})
@@ -27,9 +29,28 @@ route.get('/getlivers',async(req,res)=>{
 
 })
 
-//查询正在直播
+//获取正在直播主播列表
 route.get('/onliveing',async(req,res)=>{
+    const livinglist = await live.isLiving()
+    if(!livinglist[0]){
+        res.json({code:400,livinglist})
+    }
+    res.json({code:200,livinglist})
+})
 
+
+//按分类获取主播列表
+route.get('/getbytype',async(req,res)=>{
+     const {type}=req.query
+     const livers=await live.getLiverbytype(type)
+     res.json({code:200,livers})
+})
+
+//管理员获取列表
+route.get('/admin/getbytype',async(req,res)=>{
+    const {type}=req.query
+    const livers=await live.getLiverbytype(type)
+    res.json({code:200,livers})
 })
 
 //管理粉丝等数目

@@ -8,5 +8,8 @@ const Admin=sequelize.define('Admin',{
     password:{type:DataTypes.STRING,
         allowNull:false},
     role:{type:DataTypes.INTEGER,
-           defaultValue:0}},{freezeTableName: true})
+           defaultValue:0}},{
+    freezeTableName: true,
+    timestamps:false  
+})
            module.exports=Admin

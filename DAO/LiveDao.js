@@ -9,7 +9,9 @@ module.exports={
   changeNumber,
   getlivers,
   addLiveTest,
-  upliveimg
+  upliveimg,
+  getLiverbytype,
+  delLiver
 }
 
 //添加用户直播
@@ -53,10 +55,10 @@ async function getlivers(value){
 return JSON.parse(JSON.stringify(livers, null, 2))
 }
 
-//管理主播粉丝，礼物，排行数
-async function changeNumber(uid,fans,gift,no){
+//更新主播数据
+async function changeNumber(uid,name,gift,no){
    await live.sync()
-    const isChange =await live.update({fans,gift,no},{
+    const isChange =await live.update({name,gift,no},{
        where:{uid}
    })
    return JSON.parse(JSON.stringify(isChange, null, 2))
@@ -84,11 +86,30 @@ async function findLiver(uid){
    return JSON.parse(JSON.stringify(liver, null, 2))
 }
 
+//按分类获取主播列表
+async function getLiverbytype(type){
+   await live.sync()
+   const typelivers=await live.findAll({ 
+      where:{type},
+       order: [
+         ['fans', 'DESC']]
+   })
+  return JSON.parse(JSON.stringify(typelivers, null, 2))
+}
+
 //寻找正在直播的用户
 async function isLiving(){
     await live.sync()
     const living=await live.findAll({
-       where:{islive:true}
-   })
+       where:{islive:true}})
    return JSON.parse(JSON.stringify(living, null, 2))
+}
+
+//删除主播
+async function delLiver(uid){
+   await live.sync()
+   const isdel=await live.destroy({
+      where:{uid}
+   })
+  return JSON.parse(JSON.stringify(isdel, null, 2))
 }
